@@ -72,7 +72,7 @@ public class FileUtils {
 		int checkedFiles = 0;
 		long lines = 0;
 		
-		ArrayList<Resource> resourceFiles = new ArrayList<>();
+		ArrayList<Resource> resourceFiles = new ArrayList<Resource>();
 		
 		Scanner input = new Scanner(System.in);
 		for (int j = 0; j < resource.size(); j++) {

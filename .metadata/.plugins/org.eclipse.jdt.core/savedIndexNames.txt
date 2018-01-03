@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+C:\Users\Aleson\Documents\GitHub\Java-POCs\.metadata\.plugins\org.eclipse.jdt.core
+3938862669.index
+1543411878.index
+4192374312.index
+3550785020.index
