@@ -1,0 +1,7 @@
+package useless.domain;
+
+public class Images {
+	
+	private String name;
+	
+}

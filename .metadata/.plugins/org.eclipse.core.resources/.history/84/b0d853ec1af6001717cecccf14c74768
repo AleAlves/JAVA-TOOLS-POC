@@ -1,0 +1,13 @@
+package useless.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Directory {
+
+	ArrayList<String> path;
+
+	public Directory() {
+	}
+
+}

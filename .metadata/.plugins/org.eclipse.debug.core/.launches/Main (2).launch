@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/ReplacePrintTrace/src/cleaner/Main.java"/>
+<listEntry value="/ReplacePrintTrace/src/replace/Main.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="cleaner.Main"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="replace.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ReplacePrintTrace"/>
 </launchConfiguration>
