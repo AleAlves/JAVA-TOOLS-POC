@@ -37,7 +37,7 @@ public class Main {
 		style.addPath("C:\\Users\\Aleson\\Documents\\gapzero-android\\app\\src\\main\\res\\values-w820dp");
 		style.addPath("C:\\Users\\Aleson\\Documents\\gapzero-android\\app\\src\\main\\res\\values-v21");
 		menu.addPath("C:\\Users\\Aleson\\Documents\\gapzero-android\\app\\src\\main\\res\\menu");
-		
+
 		FileUtil classesUtil = new FileUtil();
 		FileUtil layoutsUtil = new FileUtil();
 		FileUtil drawablesUtil = new FileUtil();
@@ -57,13 +57,13 @@ public class Main {
 		ArrayList<Resource> resImages = new ArrayList<Resource>();
 		ArrayList<Resource> resStyle = new ArrayList<Resource>();
 		ArrayList<Resource> resMenu = new ArrayList<Resource>();
-		
+
 		long start = System.currentTimeMillis();
 
 		for (String s : drawable.getPath()) {
 			projectImagesFiles.addAll(drawablesUtil.walkDirs(s));
 		}
-		
+
 		for (File file : projectImagesFiles) {
 			Image image = new Image();
 			image.setId(file.getName());
@@ -84,7 +84,7 @@ public class Main {
 			projectStyleFiles.addAll(styleUtil.walkDirs(s));
 		}
 		System.out.println("Styles: " + projectStyleFiles.size());
-		
+
 		for (String s : menu.getPath()) {
 			projectMenuFiles.addAll(menuUtil.walkDirs(s));
 		}
@@ -139,11 +139,12 @@ public class Main {
 			resource.setResourceType(null);
 			resMenu.add(resource);
 		}
-		
+
 		ArrayList<Resource> resources = new ArrayList<>();
 		for (Resource xml : resImages) {
-			if (xml.getFile().getName().contains(".xml"))
+			if (xml.getFile().getAbsoluteFile().toString().contains(".xml")) {
 				resources.add(xml);
+			}
 		}
 		resources.addAll(resLayout);
 		resources.addAll(resJava);
@@ -156,19 +157,19 @@ public class Main {
 		System.out.println(uselessFiles.size());
 		String time = new SimpleDateFormat("mm:ss:SSS").format((System.currentTimeMillis() - start));
 		System.out.println("Time: " + time);
-		
-		Scanner reader = new Scanner(System.in); 
+
+		Scanner reader = new Scanner(System.in);
 		System.out.println("Delete all? [y/n]");
 		String n = reader.next();
-		if("y".equalsIgnoreCase(n)) {
-			for(Resource r : uselessFiles) {
+		if ("y".equalsIgnoreCase(n)) {
+			for (Resource r : uselessFiles) {
 				r.getFile().delete();
 			}
-		}
-		else {
+			System.out.println("deleted");
+		} else {
 			System.out.println("finished");
 		}
-		reader.close(); 
+		reader.close();
 	}
 
 }

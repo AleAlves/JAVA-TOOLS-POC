@@ -3,13 +3,13 @@ package useless.domain;
 import java.io.File;
 
 public class Resource {
-	
+
 	private File file;
 	private String path;
 	private String name;
-	private boolean notFound; 
+	private boolean notFound;
 	private ResourceType resourceType;
-	
+
 	public File getFile() {
 		return file;
 	}
@@ -23,7 +23,10 @@ public class Resource {
 	}
 
 	public void setName(String name) {
-		this.name = name.substring(0, name.lastIndexOf('.'));
+		while(name.contains(".")) {
+			name = name.substring(0, name.lastIndexOf('.'));
+		}
+		this.name = name;
 	}
 
 	public boolean isNotFound() {
@@ -49,5 +52,5 @@ public class Resource {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 }

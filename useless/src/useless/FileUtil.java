@@ -104,24 +104,33 @@ public class FileUtil {
 		int checkedFiles = 0;
 		int notFoundCount = 0;
 		ArrayList<Resource> resourceFiles = new ArrayList<Resource>();
-		System.out.println(resource.size() + " - " + filesToSearch.size());
 		for (Resource resourceFile : resource) {
 			boolean found = false;
 			checkedFiles++;
 			System.out.println(checkedFiles + "/" + resource.size());
 			for (Resource searchingFile : filesToSearch) {
+
 				if (!found) {
-					try (BufferedReader br = new BufferedReader(new FileReader(searchingFile.getFile()))) {
-						for (String line; (line = br.readLine()) != null;) {
-							if (line.contains(resourceFile.getName())) {
-								found = true;
-								break;
+					try {
+						BufferedReader br = new BufferedReader(new FileReader(searchingFile.getFile()));
+						try {
+							StringBuilder sb = new StringBuilder();
+							String line = br.readLine();
+
+							while (line != null) {
+								line = br.readLine();
+								if (line.contains(resourceFile.getName())) {
+									found = true;
+									break;
+								}
 							}
+							String everything = sb.toString();
+							System.out.print(everything);
+						} finally {
+							br.close();
 						}
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e) {
+
 					}
 				}
 			}
@@ -134,41 +143,15 @@ public class FileUtil {
 		for (Resource r : resourceFiles) {
 			System.out.println("Not found:" + r.getName());
 		}
-		
-		for (Resource r : resourceFiles) {
-			try {
-				saveReport(r.getFile());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		System.out.println("Checked files: " + checkedFiles + " Not found: " + notFoundCount);
 		return resourceFiles;
 	}
-	
+
 	private void saveReport(File file) throws IOException {
 		try {
-		File fileDest = new File("D:\\temp\\imagens", file.getName());
-	    Files.copy(file.toPath(), fileDest.toPath());
-	    
-		}catch(Exception e) {
-			e.printStackTrace();
+			File fileDest = new File("D:\\temp\\imagens", file.getName());
+			Files.copy(file.toPath(), fileDest.toPath());
+		} catch (Exception e) {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
