@@ -136,7 +136,7 @@ public class FileUtils {
 				if (line.contains("Copyright")) {
 					// System.out.println(dir.get(k).getName());
 					hasCR = true;
-					//removeHeader(dir.get(k));
+//					removeHeader(dir.get(k));
 					break;
 				}
 				lines++;
@@ -145,7 +145,8 @@ public class FileUtils {
 				doesNotHaveCR++;
 				filesToAddCR.add(dir.get(k));
 				System.out.println(dir.get(k).getName());
-				 insertCopyright(dir.get(k));
+//				 insertCopyright(dir.get(k));
+				removeHeader(dir.get(k));
 			}
 			checkedFiles++;
 		}
@@ -207,9 +208,7 @@ public class FileUtils {
 		try {
 			Path path = Paths.get(file.getAbsolutePath());
 			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-			for (int i = 0; i < 19; i++) {
-				lines.remove(0);
-			}
+			lines.remove(0);
 			Files.write(path, lines, StandardCharsets.UTF_8);
 			// insertCopyright(file);
 		} catch (Exception e) {
