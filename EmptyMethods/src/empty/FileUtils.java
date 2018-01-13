@@ -107,8 +107,7 @@ public class FileUtils {
 			resourceFiles.add(resource.get(j));
 			input.close();
 			checkedFiles++;
-			System.out.println("Checking files: " + checkedFiles + "/"
-					+ resource.size());
+			System.out.println("Checking files: " + checkedFiles + "/" + resource.size());
 		}
 		return resourceFiles;
 	}
@@ -130,26 +129,29 @@ public class FileUtils {
 
 		for (int k = 0; k < dir.size(); k++) {
 			if (!dir.get(k).getAbsolutePath().toString().contains("seguros")) {
-				try {
-					input = new Scanner(dir.get(k));
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+
 				lines = 0;
 				hasCR = false;
 				curvyBrackets = false;
 				String codigo = "";
-				try (BufferedReader br = new BufferedReader(new FileReader(
-						dir.get(k)))) {
-					for (String line; (line = br.readLine()) != null;) {
-						codigo = codigo.concat(line);
-						lines++;
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(dir.get(k)));
+					try {
+						StringBuilder sb = new StringBuilder();
+						String line = br.readLine();
+						while (line != null) {
+							line = br.readLine();
+							codigo = codigo.concat(line);
+						}
+						String everything = sb.toString();
+						System.out.print(everything);
+					} finally {
+						br.close();
 					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+
 				}
+
 				int lastChar = 0;
 				int localOcurence = 0;
 				boolean empty = true;
@@ -160,11 +162,10 @@ public class FileUtils {
 						for (int m = l; m < codigoCharArray.length; m++) {
 							char curentChar = codigoCharArray[m];
 							if ((int) curentChar == 9 || (int) curentChar == 32) {
-								curentChar = codigoCharArray[m+1];
+								curentChar = codigoCharArray[m + 1];
 							} else if ((int) curentChar == 125) {
 								localOcurence++;
-								System.out.println(dir.get(k).getName()
-										+ " ocurence:" + localOcurence);
+								System.out.println(dir.get(k).getName() + " ocurence:" + localOcurence);
 								// insertLog((int)lines,dir.get(k));
 								break;
 							} else {
@@ -185,8 +186,7 @@ public class FileUtils {
 	private void insertLog(int line, File file) {
 		try {
 			Path path = Paths.get(file.getAbsolutePath());
-			List<String> lines = Files.readAllLines(path,
-					StandardCharsets.UTF_8);
+			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
 			int position = line;
 			String extraLine = "*";

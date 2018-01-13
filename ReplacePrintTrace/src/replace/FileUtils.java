@@ -108,8 +108,7 @@ public class FileUtils {
 			resourceFiles.add(resource.get(j));
 			input.close();
 			checkedFiles++;
-			System.out.println("Checking files: " + checkedFiles + "/"
-					+ resource.size());
+			System.out.println("Checking files: " + checkedFiles + "/" + resource.size());
 		}
 		return resourceFiles;
 	}
@@ -128,31 +127,38 @@ public class FileUtils {
 		for (int k = 0; k < dir.size(); k++) {
 			lines = 0;
 			if (!dir.get(k).getAbsolutePath().toString().contains("seguros")) {
-				try(BufferedReader br = new BufferedReader(new FileReader(dir.get(k)))) {
-				    for(String line; (line = br.readLine()) != null; ) {
-				    	if(line.contains("printStackTrace")){
-//				    		insertLog((int) lines,dir.get(k));
-				    		System.out.println("Classe: " + dir.get(k).getName());
-				    		printStackTraceCount++;
-				    	}
-				    	lines++;
-				    }
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(dir.get(k)));
+					try {
+						StringBuilder sb = new StringBuilder();
+						String line = br.readLine();
+						while (line != null) {
+							line = br.readLine();
+							if (line.contains("printStackTrace")) {
+								insertLog((int) lines, dir.get(k));
+								System.out.println(dir.get(k).getName());
+								printStackTraceCount++;
+								break;
+							}
+						}
+						String everything = sb.toString();
+						System.out.print(everything);
+					} finally {
+						br.close();
+					}
+				} catch (Exception e) {
+
 				}
 			}
 		}
-		 System.out.println("Checked files: " + checkedFiles + " replaced: "+ printStackTraceCount);
+		System.out.println("Checked files: " + checkedFiles + " replaced: " + printStackTraceCount);
 		return resourceFiles;
 	}
 
 	private void insertLog(int line, File file) {
 		try {
 			Path path = Paths.get(file.getAbsolutePath());
-			List<String> lines = Files.readAllLines(path,
-					StandardCharsets.UTF_8);
+			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
 			int position = line;
 			String extraLine = "			Log.e(\"Error\",e.getMessage());";
