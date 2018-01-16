@@ -119,13 +119,13 @@ public class FileUtil {
 
 							while (line != null) {
 								line = br.readLine();
-								if (line.contains(resourceFile.getName())) {
+								if (line.contains("Log.e(\"Error\", e.getMessage());")) {
 									found = true;
+									System.out.println(searchingFile.getName());
 									break;
 								}
 							}
 							String everything = sb.toString();
-							System.out.print(everything);
 						} finally {
 							br.close();
 						}
@@ -134,14 +134,6 @@ public class FileUtil {
 					}
 				}
 			}
-			if (!found) {
-				resourceFiles.add(resourceFile);
-				notFoundCount++;
-			}
-		}
-
-		for (Resource r : resourceFiles) {
-			System.out.println("Not found:" + r.getName());
 		}
 		System.out.println("Checked files: " + checkedFiles + " Not found: " + notFoundCount);
 		return resourceFiles;

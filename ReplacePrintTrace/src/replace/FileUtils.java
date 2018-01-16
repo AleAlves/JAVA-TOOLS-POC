@@ -134,7 +134,7 @@ public class FileUtils {
 						String line = br.readLine();
 						while (line != null) {
 							line = br.readLine();
-							if (line.contains("printStackTrace")) {
+							if (line.contains("Log.e(\"Error\", e.getMessage());")) {
 								insertLog((int) lines, dir.get(k));
 								System.out.println(dir.get(k).getName());
 								printStackTraceCount++;
@@ -161,7 +161,7 @@ public class FileUtils {
 			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
 			int position = line;
-			String extraLine = "			Log.e(\"Error\",e.getMessage());";
+			String extraLine = "			Log.e(\"Error\", e.toString());";
 			lines.remove(line);
 			lines.add(position, extraLine);
 			Files.write(path, lines, StandardCharsets.UTF_8);
