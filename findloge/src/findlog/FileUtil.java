@@ -106,46 +106,47 @@ public class FileUtil {
 
 		ArrayList<Resource> resourceFiles = new ArrayList<Resource>();
 		for (Resource resourceFile : resource) {
-			boolean found = false;
-			int linha = 0;
-			checkedFiles++;
-			System.out.println(checkedFiles + "/" + resource.size());
+			if (!resourceFile.getPath().contains("app\\seguros")) {
+				boolean found = false;
+				int linha = 0;
+				checkedFiles++;
+				System.out.println(checkedFiles + "/" + resource.size());
 
-			if (!found) {
-				try {
-					BufferedReader br = new BufferedReader(new FileReader(resourceFile.getFile()));
+				if (!found) {
 					try {
-						StringBuilder sb = new StringBuilder();
-						String line = br.readLine();
+						BufferedReader br = new BufferedReader(new FileReader(resourceFile.getFile()));
+						try {
+							StringBuilder sb = new StringBuilder();
+							String line = br.readLine();
 
-						while (line != null) {
-							linha++;
-							line = br.readLine();
-							if (line.contains("Log.e(\"Error\", e.getMessage());")) {
-								found = true;
-								insertLog(linha, resourceFile.getFile());
-								break;
+							while (line != null) {
+								linha++;
+								line = br.readLine();
+								if (line.contains("e.printStackTrace();")) {
+									found = true;
+									insertLog(linha, resourceFile.getFile());
+									// break;
+								}
 							}
+							String everything = sb.toString();
+							System.out.print(everything);
+						} finally {
+							br.close();
 						}
-						String everything = sb.toString();
-						System.out.print(everything);
-					} finally {
-						br.close();
-					}
-				} catch (Exception e) {
+					} catch (Exception e) {
 
+					}
+				}
+				if (!found) {
+					resourceFiles.add(resourceFile);
+					notFoundCount++;
 				}
 			}
-			if (!found) {
-				resourceFiles.add(resourceFile);
-				notFoundCount++;
+
+			for (Resource r : resourceFiles) {
+				System.out.println(r.getName());
 			}
 		}
-		
-		for(Resource r : resourceFiles) {
-			System.out.println(r.getName());
-		}
-		
 		System.out.println("Checked files: " + checkedFiles + " Not found: " + notFoundCount);
 		return resourceFiles;
 	}

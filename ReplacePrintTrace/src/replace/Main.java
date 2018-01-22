@@ -14,11 +14,8 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		Directory directoryClass = new Directory();
-
-		directoryClass
-				.setPath("C:/Users/Aleson/Documents/gapzero-android/app/src/main/java/com/santander/app/");
-//		C:\Users\Aleson\Documents\gapzero-android\app\src\main\java\com\santander\app\analytics
-//		C:\Users\Aleson\Documents\gapzero-android\app\src\main\java\com\santander\app\carteiradiaria
+//		"C:\\Users\\Aleson\\Documents\\GitHub\\NASA-APOD-app\\app\\src\\main\\java\\com\\aleson\\example\\nasaapodapp"
+		directoryClass.setPath("C:/Users/Aleson/Documents/gapzero-android/app/src/main/java/com/santander/app/");
 		FileUtils res = new FileUtils();
 		FileUtils classes = new FileUtils();
 

@@ -119,13 +119,13 @@ public class FileUtil {
 
 							while (line != null) {
 								line = br.readLine();
-								if (line.contains("Log.e(\"Error\", e.getMessage());")) {
+								if (line.contains(resourceFile.getName())) {
 									found = true;
-									System.out.println(searchingFile.getName());
 									break;
 								}
 							}
 							String everything = sb.toString();
+							System.out.print(everything);
 						} finally {
 							br.close();
 						}
@@ -134,16 +134,16 @@ public class FileUtil {
 					}
 				}
 			}
+			if (!found) {
+				resourceFiles.add(resourceFile);
+				notFoundCount++;
+			}
+		}
+
+		for (Resource r : resourceFiles) {
+			System.out.println("Not found:" + r.getName());
 		}
 		System.out.println("Checked files: " + checkedFiles + " Not found: " + notFoundCount);
 		return resourceFiles;
-	}
-
-	private void saveReport(File file) throws IOException {
-		try {
-			File fileDest = new File("D:\\temp\\imagens", file.getName());
-			Files.copy(file.toPath(), fileDest.toPath());
-		} catch (Exception e) {
-		}
 	}
 }

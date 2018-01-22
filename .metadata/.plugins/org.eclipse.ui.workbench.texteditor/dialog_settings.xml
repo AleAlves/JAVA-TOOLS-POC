@@ -2,18 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="searchLogE" key="selection"/>
+		<item value="insertLog" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="insertLog"/>
+			<item value="insertCopyright"/>
 			<item value="searchLogE"/>
 			<item value="spinner_ab_holo_dark_un"/>
 			<item value="removeHeader"/>
 			<item value="saveReport"/>
-			<item value="insertLog"/>
-			<item value="insertCopyright"/>
 			<item value="directoryClass"/>
 		</list>
 		<list key="replacehistory">

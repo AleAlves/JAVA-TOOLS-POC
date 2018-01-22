@@ -15,7 +15,7 @@ public class Main {
 
 		Directory directoryClass = new Directory();
 
-		directoryClass.setPath("C:/Users/Aleson/Documents/gapzero-android/app/src/main/java/com/");
+		directoryClass.setPath("C:\\Users\\Aleson\\Documents\\gapzero-android\\app\\src\\main\\java\\com\\santander\\app");
 
 		FileUtils res = new FileUtils();
 		FileUtils classes = new FileUtils();

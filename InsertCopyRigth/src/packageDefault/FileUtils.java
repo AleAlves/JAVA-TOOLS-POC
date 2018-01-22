@@ -145,8 +145,8 @@ public class FileUtils {
 				doesNotHaveCR++;
 				filesToAddCR.add(dir.get(k));
 				System.out.println(dir.get(k).getName());
-//				 insertCopyright(dir.get(k));
-				removeHeader(dir.get(k));
+				 insertCopyright(dir.get(k));
+//				removeHeader(dir.get(k));
 			}
 			checkedFiles++;
 		}
@@ -160,7 +160,7 @@ public class FileUtils {
 			Path path = Paths.get(file.getAbsolutePath());
 			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 			int position = 0;
-			String extraLine = "// Copyright (c) 2018 SANTANDER BRASIL. All Rights Reserved.";
+			String extraLine = "\n// Copyright (c) 2018 SANTANDER BRASIL, All Rights Reserved.\n";
 			lines.add(position, extraLine);
 			Files.write(path, lines, StandardCharsets.UTF_8);
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class FileUtils {
 			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 			lines.remove(0);
 			Files.write(path, lines, StandardCharsets.UTF_8);
-			// insertCopyright(file);
+			insertCopyright(file);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
