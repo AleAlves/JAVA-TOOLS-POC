@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.io.FileUtils;
+
 import useless.domain.Resource;
 
 public class FileUtil {
@@ -136,6 +138,7 @@ public class FileUtil {
 			}
 			if (!found) {
 				resourceFiles.add(resourceFile);
+				saveReport(resourceFile.getFile());
 				notFoundCount++;
 			}
 		}
@@ -146,4 +149,20 @@ public class FileUtil {
 		System.out.println("Checked files: " + checkedFiles + " Not found: " + notFoundCount);
 		return resourceFiles;
 	}
+
+	public void saveReport(File file) {
+		File mediaStorageDir = new File("D:/temp/useless/");
+		if (!mediaStorageDir.exists()) {
+			mediaStorageDir.mkdirs();
+		}
+		File source = new File(file.getPath());
+		File dest = new File("D:/temp/useless/" + file.getName());
+		try {
+			FileUtils.copyFile(source, dest);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
